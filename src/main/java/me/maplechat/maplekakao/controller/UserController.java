@@ -6,10 +6,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,6 +17,12 @@ public class UserController {
 
     @Value("${mapple.baseUrl}")
     String baseUrl;
+
+    @GetMapping("/")
+    public String hello() {
+
+        return "hello";
+    }
 
     @PostMapping("/")
     public JSONObject userInfo(@RequestBody JSONObject params){
