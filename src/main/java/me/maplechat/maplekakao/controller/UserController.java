@@ -91,7 +91,7 @@ public class UserController {
             json.put("version","2.0");
             json.put("template",template);
 
-            return json;
+
 
         }catch (Exception e){
             e.printStackTrace();
