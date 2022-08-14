@@ -66,7 +66,7 @@ public class UserController {
             JSONObject basicCard = new JSONObject();
             JSONObject thumbNailImgUrl = new JSONObject();
             JSONObject buttons1 = new JSONObject();
-            ArrayList<JSONObject> buttons = new ArrayList<>();
+            JSONArray buttons = new JSONArray();
             ArrayList<JSONObject> outputs = new ArrayList<JSONObject>();
 
             buttons1.put("action","webLink");
