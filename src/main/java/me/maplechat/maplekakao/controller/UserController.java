@@ -90,7 +90,7 @@ public class UserController {
 
 
             basicCard.put("basicCard",response2);
-            basicCard.put("buttons",buttons1);
+//            basicCard.put("buttons",buttons1);
 
             outputs.add(basicCard);
 
