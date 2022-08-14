@@ -96,7 +96,7 @@ public class UserController {
         }catch (Exception e){
             e.printStackTrace();
         }
-
+        System.out.println(json.toJSONString());
         return json;
     }
 
