@@ -87,9 +87,11 @@ public class UserController {
             response2.put("title","캐릭터 정보");
 
 
+            JSONObject re = new JSONObject();
 
+            re.put("text","오ㅔㅐ 안돼");
 
-            basicCard.put("basicCard",response2);
+            basicCard.put("simpleText",re);
 //            basicCard.put("buttons",buttons1);
 
             outputs.add(basicCard);
