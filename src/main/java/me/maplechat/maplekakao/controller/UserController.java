@@ -1,5 +1,6 @@
 package me.maplechat.maplekakao.controller;
 
+import jdk.nashorn.internal.parser.JSONParser;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.jsoup.Jsoup;
@@ -62,36 +63,43 @@ public class UserController {
 
             }
           //json 에 json array(JSON) 그안에 json
-            JSONObject template = new JSONObject();
             JSONObject basicCard = new JSONObject();
-            JSONObject thumbNailImgUrl = new JSONObject();
-            JSONObject buttons1 = new JSONObject();
-            JSONArray buttons = new JSONArray();
-            ArrayList<JSONObject> outputs = new ArrayList<JSONObject>();
+            JSONObject buttons = new JSONObject();
+            JSONObject response2 = new JSONObject();
+            JSONObject response3 = new JSONObject();
+            JSONObject response4 = new JSONObject();
+            JSONObject templates = new JSONObject();
 
-            buttons1.put("action","webLink");
-            buttons1.put("label","웹에서 보기");
-            buttons1.put("webLinkUrl",baseUrl);
+            JSONArray outputs = new JSONArray();
 
-            buttons.add(buttons1);
+            JSONArray buttons1 = new JSONArray();
 
-            thumbNailImgUrl.put("imageUrl",imgUrl);
+            response4.put("action","webLink");
+            response4.put("label","메이플 gg 이동");
+            response4.put("webLinkUrl",baseUrl);
+
+            buttons1.add(response4);
+
+            response3.put("imageUrl",imgUrl);
+
+            response2.put("thumbnail",response3);
+            response2.put("description",username1);
+            response2.put("title","캐릭터 정보");
 
 
 
 
-            basicCard.put("title","캐릭터 정보");
-            basicCard.put("description",username1);
-            basicCard.put("thumbnail",thumbNailImgUrl);
+            basicCard.put("basicCard",response2);
+            basicCard.put("buttons",buttons1);
 
             outputs.add(basicCard);
 
-            template.put("outputs",outputs);
 
+
+            templates.put("outputs",outputs);
+
+            json.put("templates",templates);
             json.put("version","2.0");
-            json.put("template",template);
-
-
 
         }catch (Exception e){
             e.printStackTrace();
