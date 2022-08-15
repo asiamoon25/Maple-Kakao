@@ -1,9 +1,10 @@
 package me.maplechat.maplekakao.controller;
 
-import jdk.nashorn.internal.parser.JSONParser;
 import me.maplechat.maplekakao.util.TemplateResponse;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -30,7 +31,7 @@ public class UserController {
     }
 
     @PostMapping("/")
-    public String userInfo(@RequestBody JSONObject params){
+    public JSONObject userInfo(@RequestBody JSONObject params){
         TemplateResponse templateResponse = new TemplateResponse();
 
         System.out.println(params);
@@ -81,7 +82,53 @@ public class UserController {
             e.printStackTrace();
         }
         System.out.println(templateResponse.getPayload());
-        return templateResponse.getPayload().toJSONString();
+
+        JSONParser jsonParser = new JSONParser();
+        JSONObject js = null;
+        try {
+            js = (JSONObject) jsonParser.parse("{\n" +
+                    "  \"version\": \"2.0\",\n" +
+                    "  \"template\": {\n" +
+                    "    \"outputs\": [\n" +
+                    "      {\n" +
+                    "        \"basicCard\": {\n" +
+                    "          \"title\": \"보물상자\",\n" +
+                    "          \"description\": \"보물상자 안에는 뭐가 있을까\",\n" +
+                    "          \"thumbnail\": {\n" +
+                    "            \"imageUrl\": \"https://t1.kakaocdn.net/openbuilder/sample/lj3JUcmrzC53YIjNDkqbWK.jpg\"\n" +
+                    "          },\n" +
+                    "          \"profile\": {\n" +
+                    "            \"imageUrl\": \"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4BJ9LU4Ikr_EvZLmijfcjzQKMRCJ2bO3A8SVKNuQ78zu2KOqM\",\n" +
+                    "            \"nickname\": \"보물상자\"\n" +
+                    "          },\n" +
+                    "          \"social\": {\n" +
+                    "            \"like\": 1238,\n" +
+                    "            \"comment\": 8,\n" +
+                    "            \"share\": 780\n" +
+                    "          },\n" +
+                    "          \"buttons\": [\n" +
+                    "            {\n" +
+                    "              \"action\": \"message\",\n" +
+                    "              \"label\": \"열어보기\",\n" +
+                    "              \"messageText\": \"짜잔! 우리가 찾던 보물입니다\"\n" +
+                    "            },\n" +
+                    "            {\n" +
+                    "              \"action\":  \"webLink\",\n" +
+                    "              \"label\": \"구경하기\",\n" +
+                    "              \"webLinkUrl\": \"https://e.kakao.com/t/hello-ryan\"\n" +
+                    "            }\n" +
+                    "          ]\n" +
+                    "        }\n" +
+                    "      }\n" +
+                    "    ]\n" +
+                    "  }\n" +
+                    "}");
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return js;
     }
 
 
