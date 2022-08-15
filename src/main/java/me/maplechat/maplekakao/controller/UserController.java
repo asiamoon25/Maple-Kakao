@@ -76,7 +76,6 @@ public class UserController {
 
             templateResponse.addButton("webLink","자세히 보기",userInfoUrl);
 
-            templateResponse.addOutput();
 
         }catch (Exception e){
             e.printStackTrace();

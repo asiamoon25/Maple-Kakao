@@ -1,6 +1,7 @@
 package me.maplechat.maplekakao.util;
 
 
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -21,7 +22,6 @@ public class TemplateResponse {
         payload.put("version",version);
         payload.put("template",templates);
         templates.put("outputs",outputs);
-        templates.put("buttons", buttons);
     }
 
     // for create card template
@@ -41,37 +41,37 @@ public class TemplateResponse {
 
         basicCard.put("basicCard",basicCardField);
 
+        basicCard.put("buttons",this.buttons);
+
         this.outputs.add(basicCard);
     }
 
     //web link buttons
-    public void addButton (String action, String label, String messageText, String webLinkUrl){
-        JSONObject field = new JSONObject();
+    public void addButton (String action, String label, String webLinkUrl){
+        JSONObject fieldParams = new JSONObject();
 
-        field.put("action",action);
-        field.put("label",label);
-        field.put("messageText",messageText);
-        field.put("webLinkUrl",webLinkUrl);
+        fieldParams.put("action",action);
+        fieldParams.put("label",label);
+        fieldParams.put("webLinkUrl",webLinkUrl);
 
-        this.buttons.add(field);
-
+        this.buttons.add(fieldParams);
     }
     // message buttons
-    public void addButton(String action,String label,String messageText){
+//    public void addButton(String action,String label,String messageText){
+//
+//        JSONObject field = new JSONObject();
+//
+//        field.put("action",action);
+//        field.put("label",label);
+//        field.put("messageText",messageText);
+//
+//        this.buttons.put(field);
+//        this.outputs.add(this.buttons);
+//    }
 
-        JSONObject field = new JSONObject();
-
-        field.put("action",action);
-        field.put("label",label);
-        field.put("messageText",messageText);
-
-        this.buttons.add(field);
-
-    }
-
-    public void addOutput () {
-        this.outputs.add(this.buttons);
-    }
+//    public void addOutput () {
+//        this.outputs.add(this.buttons);
+//    }
 
     public JSONObject getPayload() {
         if(outputs.size() == 0){
