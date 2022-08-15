@@ -30,7 +30,7 @@ public class UserController {
     }
 
     @PostMapping("/")
-    public JSONObject userInfo(@RequestBody String params){
+    public String userInfo(@RequestBody JSONObject params){
         TemplateResponse templateResponse = new TemplateResponse();
 
         System.out.println(params);
@@ -81,7 +81,7 @@ public class UserController {
             e.printStackTrace();
         }
         System.out.println(templateResponse.getPayload());
-        return templateResponse.getPayload();
+        return templateResponse.getPayload().toJSONString();
     }
 
 
