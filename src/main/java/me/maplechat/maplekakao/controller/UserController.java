@@ -1,6 +1,7 @@
 package me.maplechat.maplekakao.controller;
 
 import jdk.nashorn.internal.parser.JSONParser;
+import me.maplechat.maplekakao.util.TemplateResponse;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.jsoup.Jsoup;
@@ -30,9 +31,17 @@ public class UserController {
 
     @PostMapping("/")
     public JSONObject userInfo(@RequestBody JSONObject params){
+        TemplateResponse templateResponse = new TemplateResponse();
+
         System.out.println(params.toJSONString());
         String userInfoUrl = baseUrl + "u/"+"제오스UG";
+        String title = "캐릭터 정보";
+        String description = "제오스UG";
+
+
+
         JSONObject json = new JSONObject();
+
         try{
             Document doc = Jsoup.connect(userInfoUrl).get();
 
@@ -59,55 +68,21 @@ public class UserController {
                  worldRank = e.select("div.col-lg-8").select("span").get(3).text(); // 월드 랭킹
                  workRankWorld = e.select("div.col-lg-8").select("span").get(4).text(); // 월드 직업 랭킹
                  workRankAll = e.select("div.col-lg-8").select("span").get(5).text(); // 전체 직업 랭킹
-
-
             }
-          //json 에 json array(JSON) 그안에 json
-            JSONObject basicCard = new JSONObject();
-            JSONObject buttons = new JSONObject();
-            JSONObject response2 = new JSONObject();
-            JSONObject response3 = new JSONObject();
-            JSONObject response4 = new JSONObject();
-            JSONObject templates = new JSONObject();
 
-            JSONArray outputs = new JSONArray();
+            json.put("imageUrl",imgUrl);
 
-            JSONArray buttons1 = new JSONArray();
+            templateResponse.addBasicCard(title,description,json);
 
-            response4.put("action","webLink");
-            response4.put("label","메이플 gg 이동");
-            response4.put("webLinkUrl",baseUrl);
+            templateResponse.addButton("webLink","자세히 보기",userInfoUrl);
 
-            buttons1.add(response4);
-
-            response3.put("imageUrl",imgUrl);
-
-            response2.put("thumbnail",response3);
-            response2.put("description",username1);
-            response2.put("title","캐릭터 정보");
-
-
-            JSONObject re = new JSONObject();
-
-            re.put("text","오ㅔㅐ 안돼");
-
-            basicCard.put("simpleText",re);
-//            basicCard.put("buttons",buttons1);
-
-            outputs.add(basicCard);
-
-
-
-            templates.put("outputs",outputs);
-
-            json.put("templates",templates);
-            json.put("version","2.0");
+            templateResponse.addOutput();
 
         }catch (Exception e){
             e.printStackTrace();
         }
-        System.out.println(json.toJSONString());
-        return json;
+        System.out.println(templateResponse.getPayload());
+        return templateResponse.getPayload();
     }
 
 
