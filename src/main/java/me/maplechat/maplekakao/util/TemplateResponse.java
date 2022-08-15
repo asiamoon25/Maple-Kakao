@@ -68,16 +68,16 @@ public class TemplateResponse {
                 "    \"outputs\": [\n" +
                 "      {\n" +
                 "        \"basicCard\": {\n" +
-                "          \"title\": \"캐릭터 정보\",\n" +
-                "          \"description\": \"유저네임\",\n" +
+                "          \"title\": \""+title+"\",\n" +
+                "          \"description\": \""+username+"\",\n" +
                 "          \"thumbnail\": {\n" +
-                "            \"imageUrl\": \"userProfileImg\"\n" +
+                "            \"imageUrl\": \""+imgUrl+"\"\n" +
                 "          },\n" +
                 "          \"buttons\": [\n" +
                 "            {\n" +
                 "              \"action\":  \"webLink\",\n" +
                 "              \"label\": \"구경하기\",\n" +
-                "              \"webLinkUrl\": \"https:\\/\\/avatar.maplestory.nexon.com\\/Character\\/ALHHNHIKEBNCPNNIBOOFCFLBGDNIBFOMHKHFFOEEBDKCOIIDACHLIDMIIMBPMIBOMBOAMOEIOLIBAONAOFFFNHKMIKBHHKKAAJMMGOINHAGCENFAGFGHPIECGDHNENAPNACEHGMFGOLNEOLDJDNNPIFFLEDFJCLLFCJHLDBBPAEDMFKNJJKOEIOMHPFIKBAIEGJBEOMHCAMJJJPFICBHLEKOFMEJOIDODKIGMHEBPHPMODEAACLIDKHAAAHCIOGA.png\"\n" +
+                "              \"webLinkUrl\": \""+webLinkUrl+"\"\n" +
                 "            }\n" +
                 "          ]\n" +
                 "        }\n" +
