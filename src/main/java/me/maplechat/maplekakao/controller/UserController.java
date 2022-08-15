@@ -38,7 +38,7 @@ public class UserController {
         System.out.println(params);
         String userInfoUrl = baseUrl + "u/"+"제오스UG";
         String title = "캐릭터 정보";
-        String description = "제오스UG";
+
 
 
 
@@ -71,66 +71,15 @@ public class UserController {
                  workRankWorld = e.select("div.col-lg-8").select("span").get(4).text(); // 월드 직업 랭킹
                  workRankAll = e.select("div.col-lg-8").select("span").get(5).text(); // 전체 직업 랭킹
             }
-
-            json.put("imageUrl",imgUrl);
-
-            templateResponse.addBasicCard(title,description,json);
-
-            templateResponse.addButton("webLink","자세히 보기",userInfoUrl);
-
+         json = templateResponse.convertFromStringToJSON(title,username1,imgUrl,userInfoUrl);
 
         }catch (Exception e){
             e.printStackTrace();
         }
 
-        // 여기서 부터 분리할 거
-        JSONParser jsonParser = new JSONParser();
-        JSONObject js = null;
-        try {
-            js = (JSONObject) jsonParser.parse("{\n" +
-                    "  \"version\": \"2.0\",\n" +
-                    "  \"template\": {\n" +
-                    "    \"outputs\": [\n" +
-                    "      {\n" +
-                    "        \"basicCard\": {\n" +
-                    "          \"title\": \"보물상자\",\n" +
-                    "          \"description\": \"보물상자 안에는 뭐가 있을까\",\n" +
-                    "          \"thumbnail\": {\n" +
-                    "            \"imageUrl\": \"https://t1.kakaocdn.net/openbuilder/sample/lj3JUcmrzC53YIjNDkqbWK.jpg\"\n" +
-                    "          },\n" +
-                    "          \"profile\": {\n" +
-                    "            \"imageUrl\": \"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4BJ9LU4Ikr_EvZLmijfcjzQKMRCJ2bO3A8SVKNuQ78zu2KOqM\",\n" +
-                    "            \"nickname\": \"보물상자\"\n" +
-                    "          },\n" +
-                    "          \"social\": {\n" +
-                    "            \"like\": 1238,\n" +
-                    "            \"comment\": 8,\n" +
-                    "            \"share\": 780\n" +
-                    "          },\n" +
-                    "          \"buttons\": [\n" +
-                    "            {\n" +
-                    "              \"action\": \"message\",\n" +
-                    "              \"label\": \"열어보기\",\n" +
-                    "              \"messageText\": \"짜잔! 우리가 찾던 보물입니다\"\n" +
-                    "            },\n" +
-                    "            {\n" +
-                    "              \"action\":  \"webLink\",\n" +
-                    "              \"label\": \"구경하기\",\n" +
-                    "              \"webLinkUrl\": \"https:\\/\\/avatar.maplestory.nexon.com\\/Character\\/ALHHNHIKEBNCPNNIBOOFCFLBGDNIBFOMHKHFFOEEBDKCOIIDACHLIDMIIMBPMIBOMBOAMOEIOLIBAONAOFFFNHKMIKBHHKKAAJMMGOINHAGCENFAGFGHPIECGDHNENAPNACEHGMFGOLNEOLDJDNNPIFFLEDFJCLLFCJHLDBBPAEDMFKNJJKOEIOMHPFIKBAIEGJBEOMHCAMJJJPFICBHLEKOFMEJOIDODKIGMHEBPHPMODEAACLIDKHAAAHCIOGA.png\"\n" +
-                    "            }\n" +
-                    "          ]\n" +
-                    "        }\n" +
-                    "      }\n" +
-                    "    ]\n" +
-                    "  }\n" +
-                    "}");
+        System.out.println(json.toJSONString());
 
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        System.out.println(Objects.requireNonNull(js).toJSONString());
-        // 끝
-        return js;
+        return json;
     }
 
 
