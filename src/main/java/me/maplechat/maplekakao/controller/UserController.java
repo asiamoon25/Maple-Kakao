@@ -16,6 +16,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 @RestController
 @CrossOrigin("*")
@@ -81,8 +82,8 @@ public class UserController {
         }catch (Exception e){
             e.printStackTrace();
         }
-        System.out.println(templateResponse.getPayload());
 
+        // 여기서 부터 분리할 거
         JSONParser jsonParser = new JSONParser();
         JSONObject js = null;
         try {
@@ -115,7 +116,7 @@ public class UserController {
                     "            {\n" +
                     "              \"action\":  \"webLink\",\n" +
                     "              \"label\": \"구경하기\",\n" +
-                    "              \"webLinkUrl\": \"https://e.kakao.com/t/hello-ryan\"\n" +
+                    "              \"webLinkUrl\": \"https:\\/\\/avatar.maplestory.nexon.com\\/Character\\/ALHHNHIKEBNCPNNIBOOFCFLBGDNIBFOMHKHFFOEEBDKCOIIDACHLIDMIIMBPMIBOMBOAMOEIOLIBAONAOFFFNHKMIKBHHKKAAJMMGOINHAGCENFAGFGHPIECGDHNENAPNACEHGMFGOLNEOLDJDNNPIFFLEDFJCLLFCJHLDBBPAEDMFKNJJKOEIOMHPFIKBAIEGJBEOMHCAMJJJPFICBHLEKOFMEJOIDODKIGMHEBPHPMODEAACLIDKHAAAHCIOGA.png\"\n" +
                     "            }\n" +
                     "          ]\n" +
                     "        }\n" +
@@ -127,7 +128,8 @@ public class UserController {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
+        System.out.println(Objects.requireNonNull(js).toJSONString());
+        // 끝
         return js;
     }
 
