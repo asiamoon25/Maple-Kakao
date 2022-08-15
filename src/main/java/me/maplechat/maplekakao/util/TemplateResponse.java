@@ -33,11 +33,11 @@ public class TemplateResponse {
 
         JSONObject thumbnailFiled = new JSONObject();
 
-        thumbnailFiled.put("imageUrl",imageUrl);
+
 
         basicCardField.put("title",title);
         basicCardField.put("description", description);
-        basicCardField.put("thumbnail",thumbnailFiled);
+        basicCardField.put("thumbnail",imageUrl);
 
         basicCard.put("basicCard",basicCardField);
 

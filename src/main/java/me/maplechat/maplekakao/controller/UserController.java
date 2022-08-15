@@ -30,10 +30,10 @@ public class UserController {
     }
 
     @PostMapping("/")
-    public JSONObject userInfo(@RequestBody JSONObject params){
+    public JSONObject userInfo(@RequestBody String params){
         TemplateResponse templateResponse = new TemplateResponse();
 
-        System.out.println(params.toJSONString());
+        System.out.println(params);
         String userInfoUrl = baseUrl + "u/"+"제오스UG";
         String title = "캐릭터 정보";
         String description = "제오스UG";
